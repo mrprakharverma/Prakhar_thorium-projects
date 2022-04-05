@@ -1,11 +1,6 @@
-let axios = require("axios");
-const jwt = require("jsonwebtoken");
 const collegemodel = require("../models/collegemodel");
 const internmodel = require("../models/internmodel")
 let validator =require("email-validator");
-
-
-
 
 const college = async function (req, res) {
     try {
@@ -41,7 +36,7 @@ const college = async function (req, res) {
 
   };
 
-  const intern = async function (req, res) {
+const intern = async function (req, res) {
      try {
           let intern = req.body
           if (Object.entries(intern).length === 0) {
@@ -70,7 +65,7 @@ const college = async function (req, res) {
 
                if (!(/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/.test(mobile))) {
                     res.status(400).send({status : false , msg : " enter valid mobileno."})
-                    return
+                    return 
                 }
 
                let collegeId = req.body.collegeId
@@ -86,10 +81,9 @@ const college = async function (req, res) {
           console.log(error)
           res.status(500).send({ status: false, msg: error.message })
      }
- 
-   };
+};
 
-   const getcollege = async function (req, res) {
+const getcollege = async function (req, res) {
      try{
          const collegeName = req.query.collegeName
       
@@ -102,7 +96,6 @@ const college = async function (req, res) {
           }
            console.log(college)
           const collegeId = college[0]._id
-        //   delete req.body["collegeName"]
           
             const interName = await internmodel.find({collegeId: collegeId, isDeleted : false})
             if(interName.length <= 0){
