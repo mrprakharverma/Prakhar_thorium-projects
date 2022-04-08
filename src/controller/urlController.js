@@ -94,7 +94,6 @@ const getUrl = async function (req, res) {
             return res.status(300).redirect(convert.longUrl)
         }
         const url = await urlModel.findOne({urlCode }) 
-        console.log(url)
         await SET_ASYNC(`${urlCode}`,JSON.stringify(url))      //second check in Db
         if (!url) {
             return res.status(404).send({ status: false, message: 'No URL Found' })
