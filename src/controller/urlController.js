@@ -91,7 +91,7 @@ const getUrl = async function (req, res) {
         if(catchData){
             // console.log("redisget")
             let convert= JSON.parse(catchData)
-            return res.status(300).redirect(convert.longUrl)
+            return res.status(302).redirect(convert.longUrl)
         }
         const url = await urlModel.findOne({urlCode }) 
         await SET_ASYNC(`${urlCode}`,JSON.stringify(url))      //second check in Db
@@ -99,7 +99,7 @@ const getUrl = async function (req, res) {
             return res.status(404).send({ status: false, message: 'No URL Found' })
         }else{
             // console.log("mongo")
-        return res.status(301).redirect(url.longUrl)
+        return res.status(302).redirect(url.longUrl)
         }
 
     } catch (err) {
